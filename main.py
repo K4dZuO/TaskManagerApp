@@ -1,14 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_scss import Scss
 
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def show_greetings():
-    return "Hello!"
+def index():
+    return render_template("index.html")
 
+@app.route('/test')
+def get_test_page():
+    return render_template("ordinary.html")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
