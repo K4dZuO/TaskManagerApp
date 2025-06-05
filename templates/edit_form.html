@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+
+{% block head %}
+<title>Edit Page</title>
+{% endblock %}
+
+{% block body%}
+<h1>Update page</h1>
+<div class="content">
+  <form action="/edit/{{task.id}}" method="POST">
+    <label for="content">Description</label>
+    <br>
+    <input type="text" name="content" id="content" value="{{task.content}}" />
+    <br>
+    <br>
+    <label for="complete">Completed</label>
+    <input type="checkbox" name="complete" id="complete" value="True" {% if task.complete %}checked{% endif %} />
+    <br>
+    <br>
+    <input type="submit" class="button-accept" name="Edit a Task" id="btn_edit" value="Submit" />
+  </form>
+</div>
+{% endblock%}

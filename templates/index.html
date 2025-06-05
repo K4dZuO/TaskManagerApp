@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+<title>Task Page</title>
+{% endblock %}
+
+{% block body%}
+<div class="content">
+  <h1>Task Page</h1>
+
+  {% if tasks | length < 1 %}
+  <h3>There's no any task. Create one lower.</h3>
+  {% else %}
+  <table>
+      <tr>
+          <th>Task</th>
+          <th>Desctription</th>
+          <th>Added at</th>
+          <th>Completed</th>
+          <th>Actions</th>
+      </tr>
+      {% for task in tasks %}
+      <tr>
+          <td>{{task.id}}</td>
+          <td>{{task.content}}</td>
+          <td>{{task.created_at.strftime("%d-%m-%Y %H:%M")}}</td>
+          <td>
+            {%if task.complete %}
+            Yes
+            {% else %}
+            No
+            {% endif %}
+          </td>
+          <td>
+              <a href="/delete/{{task.id}}" method="POST">Delete</a>
+              <a href="/edit/{{task.id}}">Edit</a>
+          </td>
+      </tr>
+      {% endfor %}
+  </table>
+  {% endif %}
+  <br>
+  <form action="/" method="POST" target="_self">
+      <input type="text" name="content" id="content" required />
+      <input type="submit" class="button-accept" name="Add a task" id="btn_add" value="Send" />
+  </form>
+</div>
+{% endblock%}
